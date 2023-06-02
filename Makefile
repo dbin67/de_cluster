@@ -1,7 +1,7 @@
 DOCKER_NETWORK =	my_cluster
 IMAGES :=			base hadoop hbase
 CONTAINERS :=		namenode datanode1 datanode2 datanode3 resourcemanager \
-					hmaster hregion1 hregion2
+					hmaster hregion1 hregion2 thrift
 
 all: build run
 
@@ -40,7 +40,7 @@ fclean: clean
 	docker rmi $(IMAGES)
 
 # HADOOP
-# instance - need to fix core-site.xml, yarn-site.xml
+# need to fix workers core-site.xml, yarn-site.xml
 build_hadoop:
 	docker inspect base >/dev/null 2>&1 || docker build -t base ./base
 	docker inspect hadoop >/dev/null 2>&1 || docker build -t hadoop ./hadoop
@@ -55,16 +55,19 @@ resourcemanager: build_hadoop
 	docker run -d -p 8088:8088 --name resourcemanager hadoop /resourcemanager.sh
 
 # HBASE
-# instance - need to fix hbase-site.xml
+# need to fix backup-masters, regionservers, hbase-site.xml
 build_hbase:
 	docker inspect base >/dev/null 2>&1 || docker build -t base ./base
 	docker inspect hbase >/dev/null 2>&1 || docker build -t hbase ./hbase
 
 hmaster: build_hbase
-	docker run -d -p 16030:16030 --name hmaster hbase /hmaster.sh
+	docker run -d -p 16010:16010 --name hmaster hbase /hmaster.sh
 
 hregion: build_hbase
 	docker run -d -p 16030:16030 --name hregion hbase
 
+hregion_with_backup: build_hbase
+	docker run -d -p 16030:16030 -p 16010:16010 --name hregion hbase
+
 thrift:
-	docker run -d -p 9090:9090 -h thrift --name thrift hbase /thrift.sh
+	docker run -d -p 9090:9090 --name thrift hbase /thrift.sh
