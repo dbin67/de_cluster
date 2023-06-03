@@ -1,21 +1,26 @@
 <configuration>
     <property>
+    <!-- nodeManager 보조 서비스 지정 - 셔플링 -->
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
     </property>
     <property>
+    <!-- resourceManager 호스트 이름 설정 -->
         <name>yarn.resourcemanager.hostname</name> 
         <value>resourcemanager</value>
     </property>
     <property>
+    <!-- nodeManager 호스트 이름 설정 -->
         <name>yarn.nodemanager.hostname</name>
         <value></value>
     </property>
     <property>
+    <!-- resourceManager 바인딩 호스트 설정 -->
         <name>yarn.resourcemanager.bind-host</name> 
         <value>0.0.0.0</value>
     </property>
     <property>
+    <!-- nodeManager 바인딩 호스트 설정 -->
         <name>yarn.nodemanager.bind-host</name> 
         <value>0.0.0.0</value>
     </property>

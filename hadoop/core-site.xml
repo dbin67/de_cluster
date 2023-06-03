@@ -1,5 +1,6 @@
 <configuration>
     <property>
+    <!-- hadoop 클러스터 기본 파일 시스템 설정 -->
         <name>fs.defaultFS</name>
         <value>hdfs://namenode:9000</value>
     </property>

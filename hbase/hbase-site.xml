@@ -1,17 +1,21 @@
 <configuration>
   <property>
+    <!-- Hbase 루트 디렉토리 지정 -->
     <name>hbase.rootdir</name>
     <value>hdfs://namenode:9000/hbase</value>
   </property>
   <property>
+  <!-- Hbase 클러스터의 분산 모드 여부 -->
     <name>hbase.cluster.distributed</name>
     <value>true</value>
   </property>
   <property>
+  <!-- zookeeper 서버들의 호스트 이름 지정 -->
     <name>hbase.zookeeper.quorum</name>
     <value>hmaster,hregion1,hregion2</value>
   </property>
   <property>
+  <!-- zookeeper 데이터 디렉토리 경로 지정 -->
     <name>hbase.zookeeper.property.dataDir</name>
     <value>/usr/local/zookeeper</value>
   </property>

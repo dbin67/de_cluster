@@ -1,11 +1,14 @@
 FROM base
 
+# hadoop 버전 및 설치파일
 ENV HADOOP_VERSION=3.3.5
 ENV HADOOP_URL=https://dlcdn.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz
 
+# hadoop 다운로드 및 압축해제
 RUN wget --quiet ${HADOOP_URL}
 RUN tar -xvzf hadoop-${HADOOP_VERSION}.tar.gz && rm -rf hadoop-${HADOOP_VERSION}.tar.gz
 
+# hadoop 디렉토리 이동 및 환경 변수 설정
 RUN mv hadoop-${HADOOP_VERSION} /opt
 ENV HADOOP_HOME=/opt/hadoop-${HADOOP_VERSION}
 ENV HADOOP_CONF_DIR=${HADOOP_HOME}/etc/hadoop
@@ -18,15 +21,18 @@ ENV HDFS_SECONDARYNAMENODE_USER="root"
 ENV YARN_RESOURCEMANAGER_USER="root"
 ENV YARN_NODEMANAGER_USER="root"
 
+# hadoop 설정 파일 추가
 ADD core-site.xml ${HADOOP_CONF_DIR}
 ADD yarn-site.xml ${HADOOP_CONF_DIR}
 ADD mapred-site.xml ${HADOOP_CONF_DIR}
 ADD hdfs-site.xml ${HADOOP_CONF_DIR}
 ADD workers ${HADOOP_CONF_DIR}
 
+# hadoop 데이터 디렉토리 생성
 RUN mkdir -p $HADOOP_HOME/dfs/data
 RUN mkdir -p $HADOOP_HOME/yarn/data
 
+# 환경 변수 설정 파일 업데이트
 RUN echo 'export JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk' >> ${HADOOP_CONF_DIR}/hadoop-env.sh
 RUN echo 'export HDFS_NAMENODE_USER="root"' >> ${HADOOP_CONF_DIR}/hadoop-env.sh
 RUN echo 'export HDFS_DATANODE_USER="root"' >> ${HADOOP_CONF_DIR}/hadoop-env.sh
