@@ -1,25 +1,32 @@
 <configuration>
+
     <property>
+    <!-- namenode 데이터 디렉토리 경로 설정 -->
         <name>dfs.namenode.name.dir</name>
         <value>${HADOOP_HOME}/dfs/name</value>
     </property>
     <property>
+    <!-- datanode 데이터 디렉토리 경로 설정 -->
         <name>dfs.datanode.data.dir</name>
         <value>${HADOOP_HOME}/dfs/data</value>
     </property>
     <property>
+    <!-- namenode RPC 바인드 호스트 설정 -->
         <name>dfs.namenode.rpc-bind-host</name>
         <value>0.0.0.0</value>
     </property>
     <property>
+    <!-- namenode 서비스 RPC 바인드 호스트 설정 -->
         <name>dfs.namenode.servicerpc-bind-host</name>
         <value>0.0.0.0</value>
     </property>
     <property>
+    <!-- namenode HTTP 바인드 호스트 설정 -->
         <name>dfs.namenode.http-bind-host</name>
         <value>0.0.0.0</value>
     </property>
     <property>
+    <!-- namenode HTTPS 바인드 호스트 설정 -->
         <name>dfs.namenode.https-bind-host</name>
         <value>0.0.0.0</value>
     </property>

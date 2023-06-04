@@ -1,5 +1,6 @@
 <configuration>
     <property>
+    <!-- map_reduce 프레임워크 설정 -->
         <name>mapreduce.framework.name</name>
         <value>yarn</value>
     </property>
