@@ -4,7 +4,8 @@ FROM alpine
 RUN apk update && apk upgrade --no-cache
 
 # 필요 패키지 설치
-RUN apk add --no-cache bash vim openjdk8 wget openssh-server openssh-client openssh-askpass
+RUN apk add --no-cache bash vim openjdk8 wget openssh-server \
+	openssh-client openssh-askpass build-base libffi-dev openssl-dev zlib-dev
 
 
 # JAVA_HOME 환경 변수 설정
@@ -12,7 +13,7 @@ ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
 ENV PATH="$PATH:$JAVA_HOME/bin"
 
 # python 버전 및 설치 파일
-ENV PYTHON_VERSION=3.7.6
+ENV PYTHON_VERSION=3.9.16
 ENV PYTHON_URL=https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz
 
 # python 다운로드 및 압축 해제
