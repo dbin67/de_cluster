@@ -10,11 +10,6 @@
         <value>resourcemanager</value>
     </property>
     <property>
-    <!-- nodeManager 호스트 이름 설정 -->
-        <name>yarn.nodemanager.hostname</name>
-        <value></value>
-    </property>
-    <property>
     <!-- resourceManager 바인딩 호스트 설정 -->
         <name>yarn.resourcemanager.bind-host</name> 
         <value>0.0.0.0</value>

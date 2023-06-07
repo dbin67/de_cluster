@@ -22,15 +22,15 @@ ENV YARN_RESOURCEMANAGER_USER="root"
 ENV YARN_NODEMANAGER_USER="root"
 
 # hadoop 설정 파일 추가
-ADD core-site.xml ${HADOOP_CONF_DIR}
-ADD yarn-site.xml ${HADOOP_CONF_DIR}
-ADD mapred-site.xml ${HADOOP_CONF_DIR}
-ADD hdfs-site.xml ${HADOOP_CONF_DIR}
-ADD workers ${HADOOP_CONF_DIR}
+ADD conf/ ${HADOOP_CONF_DIR}
 
 # hadoop 데이터 디렉토리 생성
 RUN mkdir -p $HADOOP_HOME/dfs/data
 RUN mkdir -p $HADOOP_HOME/yarn/data
+
+# scripts 복사 및 권한 설정
+ADD scripts /scripts
+RUN chmod -R a+x /scripts
 
 # 환경 변수 설정 파일 업데이트
 RUN echo 'export JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk' >> ${HADOOP_CONF_DIR}/hadoop-env.sh
@@ -40,11 +40,6 @@ RUN echo 'export HDFS_SECONDARYNAMENODE_USER="root"' >> ${HADOOP_CONF_DIR}/hadoo
 RUN echo 'export YARN_RESOURCEMANAGER_USER="root"' >> ${HADOOP_CONF_DIR}/hadoop-env.sh
 RUN echo 'export YARN_NODEMANAGER_USER="root"' >> ${HADOOP_CONF_DIR}/hadoop-env.sh
 
-ADD namenode.sh /namenode.sh
-RUN chmod a+x /namenode.sh
-
-ADD resourcemanager.sh /resourcemanager.sh
-RUN chmod a+x /resourcemanager.sh
 
 # 9864 : datanode web UI port
 # 9866 : port for data transfer

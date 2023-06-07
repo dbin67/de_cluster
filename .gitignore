@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/jupyternotebooks,python,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=jupyternotebooks,python,java
 
+.vscode
+.DS_Store
+
 ### Java ###
 # Compiled class file
 *.class

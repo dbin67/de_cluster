@@ -14,9 +14,11 @@ ENV HBASE_HOME=/opt/hbase-${HBASE_VERSION}
 ENV HBASE_CONF_DIR=${HBASE_HOME}/conf
 ENV PATH="${HBASE_HOME}/bin:$PATH"
 
-ADD hbase-site.xml ${HBASE_CONF_DIR}
-ADD regionservers ${HBASE_CONF_DIR}
-ADD backup-masters ${HBASE_CONF_DIR}
+ADD conf ${HBASE_CONF_DIR}
+
+# scripts 복사 및 권한 설정
+ADD scripts /scripts
+RUN chmod -R a+x /scripts
 
 # Hbase 환경 설정 파일 env.sh 에 java_home 경로 추가 
 RUN echo 'export JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk' >> ${HBASE_CONF_DIR}/hbase-env.sh
@@ -24,11 +26,6 @@ RUN echo 'export JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk' >> ${HBASE_CONF_DIR}/h
 # ssh 호스트 키 확인 비활성화
 RUN echo 'StrictHostKeyChecking no' >> /etc/ssh/ssh_config
 
-ADD hmaster.sh /hmaster.sh
-RUN chmod a+x /hmaster.sh
-
-ADD thrift.sh /thrift.sh
-RUN chmod a+x /thrift.sh
 
 # 16000 : The port the HBase Master should bind to.
 # 16010 : The port for the HBase Master web UI. Set to -1 if you do not want a UI instance run.
