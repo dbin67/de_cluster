@@ -5,7 +5,7 @@ RUN apk update && apk upgrade --no-cache
 
 # 필요 패키지 설치
 RUN apk add --no-cache bash vim openjdk8 wget openssh-server \
-	openssh-client openssh-askpass build-base libffi-dev openssl-dev zlib-dev
+	openssh-client openssh-askpass build-base libffi-dev openssl-dev zlib-dev sqlite-dev
 
 
 # JAVA_HOME 환경 변수 설정
