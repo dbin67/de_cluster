@@ -9,6 +9,35 @@ ENV CONSTRAINT_URL=https://raw.githubusercontent.com/apache/airflow/constraints-
 RUN pip3 install "apache-airflow[celery]==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
 RUN pip3 install psycopg2-binary redis
 
+# third-party
+RUN wget https://bitbucket.org/eunjeon/mecab-ko/downloads/mecab-0.996-ko-0.9.2.tar.gz
+
+ENV MECAB_KO_FILENAME "mecab-0.996-ko-0.9.2"
+ENV MECAB_KO_URL "https://bitbucket.org/eunjeon/mecab-ko/downloads/$MECAB_KO_FILENAME.tar.gz"
+
+ENV MECAB_KO_DIC_FILENAME "mecab-ko-dic-2.1.1-20180720"
+ENV MECAB_KO_DIC_URL "https://bitbucket.org/eunjeon/mecab-ko-dic/downloads/$MECAB_KO_DIC_FILENAME.tar.gz"
+
+RUN wget $MECAB_KO_URL
+RUN tar xvfz "$MECAB_KO_FILENAME.tar.gz"
+WORKDIR $MECAB_KO_FILENAME
+RUN ./configure --build=aarch64-unknown-linux-gnu
+RUN make
+RUN make check
+RUN make install
+
+WORKDIR /
+RUN wget $MECAB_KO_DIC_URL
+RUN tar xvfz "$MECAB_KO_DIC_FILENAME.tar.gz"
+WORKDIR $MECAB_KO_DIC_FILENAME
+RUN ./configure
+RUN make
+RUN make install
+
+WORKDIR /
+RUN pip3 install requests bs4 happybase python-mecab-ko
+RUN rm -rf mecab-*
+
 # [core]
 # executor = CeleryExecutor
 

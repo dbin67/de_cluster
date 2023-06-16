@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# initialize database
+airflow db init
+
 # user create
 airflow users create \
 	--username admin \
@@ -8,6 +11,3 @@ airflow users create \
 	--lastname admin \
 	--role Admin \
 	--email email
-
-# run webserver
-airflow webserver

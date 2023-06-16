@@ -62,7 +62,7 @@ run_airflow:
 
 	docker run -h redis --name redis -d --network ${DOCKER_NETWORK} redis
 
-	docker run -d --rm --network ${DOCKER_NETWORK} airflow airflow db init
+	docker run -d --rm --network ${DOCKER_NETWORK} airflow /scripts/init.sh
 
 	mkdir -p airflow/source/config
 	mkdir -p airflow/source/dags
@@ -97,7 +97,7 @@ run_airflow:
 	-v $(shell pwd)/airflow/source/dags:/opt/airflow/dags \
 	-v $(shell pwd)/airflow/source/dags:/opt/airflow/logs \
 	-v $(shell pwd)/airflow/source/dags:/opt/airflow/plugins \
-	-d --network ${DOCKER_NETWORK} airflow /scripts/webserver.sh
+	-d --network ${DOCKER_NETWORK} airflow airflow webserver
 
 # 시작
 start:
