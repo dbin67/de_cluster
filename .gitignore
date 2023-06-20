@@ -215,3 +215,4 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/jupyternotebooks,python,java
 
 airflow/source
+stopwords-ko.txt

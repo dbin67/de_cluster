@@ -40,6 +40,7 @@ RUN rm -rf mecab-*
 
 # [core]
 # executor = CeleryExecutor
+# load_examples = False
 
 # [database]
 # sql_alchemy_conn = postgresql+psycopg2://airflow:airflow@postgres/airflow
