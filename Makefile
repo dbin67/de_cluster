@@ -1,8 +1,9 @@
 DOCKER_NETWORK =	my_cluster
-IMAGES :=			base hadoop hbase airflow
+IMAGES :=			base hadoop hbase airflow spark
 CONTAINERS :=		datanode1 datanode2 datanode3 namenode resourcemanager \
 					hregion1 hregion2 hmaster thrift \
-					postgres redis
+					postgres redis \
+					spark
 
 all: build run
 
@@ -19,7 +20,7 @@ build: create-network
 	done
 
 # hadoop, hbase 컨테이너 실행
-run: run_hadoop run_hbase run_airflow
+run: run_hadoop run_hbase run_airflow run_spark
 
 # 각 컨테이너를 네트워크에 연결해 실행 -> 각 포트 매핑 및 호스트 이름 설정
 run_hadoop:
@@ -50,8 +51,8 @@ run_hbase:
 
 	sleep 1
 
-	docker run -d -p 16010:16010 -h hmaster -\
-	-name hmaster --network ${DOCKER_NETWORK} hbase /scripts/hmaster.sh
+	docker run -d -p 16010:16010 -h hmaster \
+	--name hmaster --network ${DOCKER_NETWORK} hbase /scripts/hmaster.sh
 
 	docker run -d -p 9090:9090 -h thrift \
 	--name thrift --network ${DOCKER_NETWORK} hbase /scripts/thrift.sh
@@ -98,6 +99,11 @@ run_airflow:
 	-v $(shell pwd)/airflow/source/dags:/opt/airflow/logs \
 	-v $(shell pwd)/airflow/source/dags:/opt/airflow/plugins \
 	-d --network ${DOCKER_NETWORK} airflow airflow webserver
+
+run_spark:
+	docker run -d -p 8081:8080 -p 18080:18080 -h spark \
+	--name spark --network ${DOCKER_NETWORK} spark
+
 
 # 시작
 start:

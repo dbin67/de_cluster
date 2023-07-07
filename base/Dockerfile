@@ -4,7 +4,7 @@ FROM alpine
 RUN apk update && apk upgrade --no-cache
 
 # 필요 패키지 설치
-RUN apk add --no-cache bash vim openjdk8 wget openssh-server \
+RUN apk add --no-cache bash vim openjdk8 wget openssh-server procps findutils \
 	openssh-client openssh-askpass build-base libffi-dev openssl-dev zlib-dev sqlite-dev
 
 
@@ -25,8 +25,8 @@ RUN /Python-$PYTHON_VERSION/configure --enable-optimizations
 
 # py3와 python사이의 심볼릭 링크 생성
 RUN make install
-RUN ln -s /usr/local/bin/python3.7 /usr/bin/python3
-RUN ln -s /usr/local/bin/python3.7 /usr/bin/python
+RUN ln -s /usr/local/bin/python3.9 /usr/bin/python3
+RUN ln -s /usr/local/bin/python3.9 /usr/bin/python
 # -> 하는 이유 : /usr/bin/python 명령어로 python 실행하게 하려고 했음.
 # 주피터 사용할꺼면 안해도 됨
 

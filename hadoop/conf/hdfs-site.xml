@@ -3,12 +3,12 @@
     <property>
     <!-- namenode 데이터 디렉토리 경로 설정 -->
         <name>dfs.namenode.name.dir</name>
-        <value>/opt/hadoop-3.3.5/dfs/name</value>
+        <value>/opt/hadoop-3.3.6/dfs/name</value>
     </property>
     <property>
     <!-- datanode 데이터 디렉토리 경로 설정 -->
         <name>dfs.datanode.data.dir</name>
-        <value>/opt/hadoop-3.3.5/dfs/data</value>
+        <value>/opt/hadoop-3.3.6/dfs/data</value>
     </property>
     <property>
     <!-- namenode RPC 바인드 호스트 설정 -->

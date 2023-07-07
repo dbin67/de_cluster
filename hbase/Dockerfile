@@ -1,7 +1,7 @@
 FROM base
 
 # Hbase 버전 및 설치 파일
-ENV HBASE_VERSION=2.5.4
+ENV HBASE_VERSION=2.5.5
 ENV HBASE_URL=http://apache.mirror.cdnetworks.com/hbase/${HBASE_VERSION}/hbase-${HBASE_VERSION}-bin.tar.gz
 
 # Hbase 다운로드 및 압축 해제

@@ -1,7 +1,7 @@
 FROM base
 
 # hadoop 버전 및 설치파일
-ENV HADOOP_VERSION=3.3.5
+ENV HADOOP_VERSION=3.3.6
 ENV HADOOP_URL=https://dlcdn.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz
 
 # hadoop 다운로드 및 압축해제
