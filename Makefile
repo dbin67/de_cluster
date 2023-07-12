@@ -101,7 +101,7 @@ run_airflow:
 	-d --network ${DOCKER_NETWORK} airflow airflow webserver
 
 run_spark:
-	docker run -d -p 8081:8080 -p 18080:18080 -h spark \
+	docker run -d -p 8081:8080 -p 18080:18080 -p 7777:7777 -h spark \
 	--name spark --network ${DOCKER_NETWORK} spark
 
 

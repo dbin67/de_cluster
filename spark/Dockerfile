@@ -33,10 +33,13 @@ ADD conf/zeppelin /$ZEPPELIN_FILE_NAME/conf
 ADD scripts /scripts
 RUN chmod -R a+x /scripts
 
+# python depencies 설치
+RUN pip3 install jupyterlab pyspark
 
+# 7777 : jupyterlab
 # 8080 : zeppelin web UI port
 # 18080 : spark history web UI port
 
-EXPOSE 8080 18080
+EXPOSE 7777 8080 18080
 
 CMD ["/scripts/start.sh"]
